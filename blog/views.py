@@ -69,7 +69,7 @@ def post_share(request, post_id):
                 f"recommends you read {post.title}"
             )
             message = (
-                f"Read {post.title} at {post.url}\n\n"
+                f"Read {post.title} at {post_url}\n\n"
                 f"{cd['name']}\'s comments: {cd['comments']}"
             )
             send_mail(
@@ -82,11 +82,12 @@ def post_share(request, post_id):
             
     else:
         form = EmailPostForm()
-        return render(
-            request,
-            'blog/post/share.html',
-            {
-                'post':post,
-                'form':form
-            }
-        )
+    return render(
+        request,
+        'blog/post/share.html',
+        {
+            'post':post,
+            'form':form,
+            'sent':sent
+        }
+    )
